@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @post.title %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @post.name %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @post.content %>
+</p>
+
+ <!--댓글 작성한 것을 화면에 보여주게 된다.-->
+ <h2>Comments</h2>
+ <% @post.comments.each do |comment| %>
+ <!--post에 연결된 comments를 배열로 가지고 있다.
+ 	do 블록으로 실행하라.-->
+ 	<p>
+ 		<b>Commenter:</b>
+ 		<%=comment.commenter%>
+ 	</p>
+ 	<p>
+ 		<b>Comment:</b>
+ 		<%=comment.body%>
+ 	</p>
+ <% end %>
+
+<h2>Add a comment:</h2>
+<%= form_for ([@post, @post.comments.build]) do |f|%>
+<!--아래를 하나의 폼으로 생성-->
+<%=render "comments/form"%>
+<%end%>
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>
